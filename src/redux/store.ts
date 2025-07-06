@@ -15,6 +15,7 @@ import storage from "redux-persist/lib/storage";
 import rootSaga from "./saga/root.saga";
 import AuthReducer from "./slide/auth/auth.slice";
 import PostReducer from "./slide/post/post.slice";
+import AppReducer from "./slide/app/app.slice";
 
 const persistConfig = {
   key: "root",
@@ -28,6 +29,7 @@ const sagaMiddleware = createSagaMiddle();
 const rootReducer = combineReducers({
   auth: AuthReducer,
   post: PostReducer,
+  app: AppReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,3 +1,3 @@
-import HeaderContainer from "./header.container";
+import Header from "./header.container";
 
-export default HeaderContainer;
+export default Header;

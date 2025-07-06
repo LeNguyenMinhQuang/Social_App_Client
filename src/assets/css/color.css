@@ -1,0 +1,81 @@
+:root {
+  --color-primary-base: #6a0dad; /* Tím Violet - Có thể là màu chính của thương hiệu */
+  --color-accent-base: #ff7f50; /* Cam Coral - Màu nhấn, nút bấm, highlight */
+  --color-success-base: #4caf50; /* Xanh lá - Thành công, thông báo tốt */
+  --color-warning-base: #ffc107; /* Vàng hổ phách - Cảnh báo */
+  --color-danger-base: #f44336; /* Đỏ - Lỗi, nguy hiểm */
+
+  --color-gradient-start: #8e2de2; /* Màu tím đậm hơn, từ ảnh */
+  --color-gradient-end: #4a00e0; /* Màu xanh tím, từ ảnh */
+
+  --color-transparent: rgba(0, 0, 0, 0); /* Màu trong suốt */
+  /* Nền và Bề mặt */
+  --color-background: #f0f2f5; /* Nền tổng thể nhẹ nhàng */
+  --color-surface-1: #ffffff; /* Nền của card, hộp thoại, thanh điều hướng */
+  --color-surface-2: #f3f3f3; /* Nền của input, button phụ, hover states */
+  --color-border: #ced0d4; /* Đường viền, divider */
+  --color-shadow: rgba(0, 0, 0, 0.1); /* Màu đổ bóng nhẹ */
+
+  /* Văn bản */
+  --color-text-primary: #1c1e21; /* Màu văn bản chính (tiêu đề, nội dung bài đăng) */
+  --color-text-secondary: #606770; /* Màu văn bản phụ (timestamp, mô tả nhỏ, chú thích) */
+  --color-text-tertiary: #8a8d91; /* Màu văn bản rất nhạt (placeholder, disabled) */
+  --color-text-inverted: #ffffff; /* Màu văn bản trên nền tối (ví dụ: trên nút bấm accent) */
+
+  /* Màu đặc biệt */
+  --color-primary: var(--color-primary-base); /* Tím */
+  --color-accent: var(--color-accent-base); /* Cam */
+  --color-link: #007bff; /* Màu link mặc định */
+
+  /* shadow */
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   Dark Mode Colors (Màu sắc cho chế độ tối)
+   ========================================================================== */
+/* Áp dụng khi có class 'dark-mode' trên body hoặc html */
+body.dark-mode,
+html.dark-mode {
+  /* Dark Mode Variables */
+
+  /* Màu thương hiệu và nhấn */
+  --color-primary-base: #b886fe; /* Tím Violet - Nhẹ hơn một chút để nổi bật trên nền tối */
+  --color-accent-base: #ffa07a; /* Cam Coral - Nhẹ hơn để nổi bật */
+  --color-success-base: #81c784; /* Xanh lá - Sáng hơn */
+  --color-warning-base: #ffe082; /* Vàng hổ phách - Sáng hơn */
+  --color-danger-base: #ef9a9a; /* Đỏ - Sáng hơn */
+
+  --color-gradient-start: #5c20a4; /* Tím đậm hơn, thích hợp cho nền tối */
+  --color-gradient-end: #2a009c; /* Xanh tím đậm hơn */
+
+  --color-transparent: rgba(0, 0, 0, 0); /* Vẫn trong suốt */
+
+  /* Nền và Bề mặt */
+  --color-background: #121212; /* Nền tổng thể rất tối */
+  --color-surface-1: #1e1e1e; /* Nền của card, hộp thoại, thanh điều hướng - tối hơn một chút so với nền */
+  --color-surface-2: #2c2c2c; /* Nền của input, button phụ, hover states - tối hơn surface-1 */
+  --color-border: #444444; /* Đường viền, divider - tối và ít nổi bật hơn */
+  --color-shadow: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Màu đổ bóng - thường ít rõ ràng hơn trong dark mode hoặc có thể là màu của shadow trên các surface sáng hơn */
+
+  /* Văn bản */
+  --color-text-primary: #e0e0e0; /* Màu văn bản chính - rất sáng để dễ đọc */
+  --color-text-secondary: #b0b3b8; /* Màu văn bản phụ - nhạt hơn primary */
+  --color-text-tertiary: #7a7a7a; /* Màu văn bản rất nhạt (placeholder, disabled) */
+  --color-text-inverted: #1c1e21; /* Màu văn bản trên nền sáng (ví dụ: trên các alert sáng hoặc input) */
+
+  /* Màu đặc biệt */
+  --color-primary: var(--color-primary-base); /* Tím */
+  --color-accent: var(--color-accent-base); /* Cam */
+  --color-link: #90caf9; /* Màu link mặc định - sáng hơn để dễ nhìn trên nền tối */
+
+  /* shadow */
+  --shadow:     /* Bóng sáng (Light Shadow/Highlight) */ -1px -1px 2px rgba(255, 255, 255, 0.05),
+    /* Màu trắng nhẹ, hướng lên/trái */ /* Bóng tối (Dark Shadow) */ 1px 1px 2px
+      rgba(0, 0, 0, 0.4); /* Màu đen đậm, hướng xuống/phải */
+}

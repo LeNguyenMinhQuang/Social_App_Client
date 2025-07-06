@@ -1,0 +1,30 @@
+:root {
+  /* --- Cỡ chữ cơ bản (Base Font Size) --- */
+  /* Đây là cỡ chữ mặc định cho toàn bộ trang.
+   * 16px là giá trị mặc định của trình duyệt cho 1rem, giữ nguyên giúp dễ tính toán.
+   */
+  --font-size-base: 16px;
+
+  /* --- Cỡ chữ tiêu đề (Heading Sizes) --- */
+  /* Sử dụng rem để tự động điều chỉnh theo font-size-base */
+  --font-size-h1: 2.5rem; /* ~40px - Tiêu đề trang, tiêu đề chính (ví dụ: Tên ứng dụng) */
+  --font-size-h2: 2rem; /* ~32px - Tiêu đề lớn cho các phần (ví dụ: Tin tức, Bạn bè) */
+  --font-size-h3: 1.75rem; /* ~28px - Tiêu đề phụ, nhóm (ví dụ: Bài viết mới, Tên nhóm) */
+  --font-size-h4: 1.5rem; /* ~24px - Tiêu đề trong card, tên người dùng nổi bật */
+  --font-size-h5: 1.25rem; /* ~20px - Tiêu đề module nhỏ, tiêu đề hộp thoại */
+  --font-size-h6: 1rem; /* ~16px - Tiêu đề rất nhỏ, dùng trong các trường hợp đặc biệt */
+
+  /* --- Cỡ chữ nội dung (Content Sizes) --- */
+  --font-size-body: 1rem; /* ~16px - Cỡ chữ mặc định cho nội dung văn bản thông thường (bài đăng, bình luận) */
+  --font-size-large: 1.125rem; /* ~18px - Cỡ chữ lớn hơn một chút cho các đoạn văn bản quan trọng */
+  --font-size-small: 0.875rem; /* ~14px - Cỡ chữ nhỏ hơn, dùng cho thời gian, chú thích, mô tả ngắn */
+  --font-size-xsmall: 0.75rem; /* ~12px - Cỡ chữ rất nhỏ, dùng cho metadata, thông báo không quan trọng */
+  --font-size-xxsmall: 0.5rem;
+
+  /* --- Cỡ chữ cho thành phần UI (UI Element Sizes) --- */
+  --font-size-button: 1rem; /* ~16px - Cỡ chữ cho các nút bấm */
+  --font-size-input: 1rem; /* ~16px - Cỡ chữ trong các trường nhập liệu */
+  --font-size-nav-item: 1.05rem; /* ~16.8px - Cỡ chữ cho các mục menu điều hướng */
+  --font-size-badge: 0.75rem; /* ~12px - Cỡ chữ cho các huy hiệu (ví dụ: số thông báo) */
+  --font-size-caption: 0.8125rem; /* ~13px - Cỡ chữ cho chú thích hình ảnh, phụ đề */
+}

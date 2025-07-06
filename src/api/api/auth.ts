@@ -2,7 +2,9 @@ import type { IUserData } from "../../datatypes/types";
 import {
   PATH_CHECK_ACCESS_TOKEN,
   PATH_LOGIN,
+  PATH_LOGOUT,
   PATH_REFRESH_TOKENS,
+  PATH_REGISTER,
 } from "../apiPath/path";
 import axiosClient from "../axios/axiosClient";
 
@@ -45,4 +47,34 @@ const login = async (payload: { userName: string; password: string }) => {
   }
 };
 
-export { checkAccessToken, refreshTokens, login };
+const register = async (payload: {
+  userName: string;
+  password: string;
+  email: string;
+}) => {
+  try {
+    const response = await axiosClient.post(PATH_REGISTER, {
+      ...payload,
+    });
+    if (response && response.data) {
+      return response.data;
+    }
+  } catch (error: any) {
+    console.error("Cannot register: ", error);
+    return error;
+  }
+};
+
+const logout = async () => {
+  try {
+    const response = await axiosClient.get(PATH_LOGOUT);
+    if (response && response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error("Cannot logout: ", error);
+    return error;
+  }
+};
+
+export { checkAccessToken, refreshTokens, login, register, logout };

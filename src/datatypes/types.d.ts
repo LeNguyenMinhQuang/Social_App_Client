@@ -30,7 +30,7 @@ export interface IPost {
   _id?: string;
   userId?: IUserData;
   content: string;
-  emotion?: string;
+  emotion?: string | null;
   images?: string[];
   isPublic?: string;
   location?: string;

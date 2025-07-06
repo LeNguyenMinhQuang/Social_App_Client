@@ -7,25 +7,34 @@ import {
   loginFailed,
   loginPending,
   loginSuccess,
-  refreshTokensFailed,
-  refreshTokensPending,
-  refreshTokensSuccess,
+  logoutFailed,
+  logoutPending,
+  logoutSuccess,
+  registerFailed,
+  registerPending,
+  registerSuccess,
 } from "./auth.action";
 
 // init state
 interface IAuthState {
-  isLoading: boolean;
+  accessStatus: "idle" | "pending" | "success" | "failed";
+  refreshStatus: "idle" | "pending" | "success" | "failed";
+  loginStatus: "idle" | "pending" | "success" | "failed";
+  registerStatus: "idle" | "pending" | "success" | "failed";
+  logoutStatus: "idle" | "pending" | "success" | "failed";
   user: IUserData | null;
   isAuthenticated: boolean;
-  isError: boolean;
   message: string | null;
 }
 
 const initialState: IAuthState = {
-  isLoading: false,
+  accessStatus: "idle",
+  refreshStatus: "idle",
+  loginStatus: "idle",
+  registerStatus: "idle",
+  logoutStatus: "idle",
   user: null,
   isAuthenticated: false,
-  isError: false,
   message: null,
 };
 
@@ -34,89 +43,103 @@ const initialState: IAuthState = {
 export const AuthSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    loginReset: (state) => {
+      state.loginStatus = "idle";
+      state.message = null;
+    },
+    registerReset: (state) => {
+      state.registerStatus = "idle";
+      state.message = null;
+    },
+    logoutReset: (state) => {
+      state.logoutStatus = "idle";
+      state.message = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(checkAccessTokenPending, (state) => {
-        state.isLoading = true;
+        state.accessStatus = "pending";
         state.user = null;
         state.isAuthenticated = false;
-        state.isError = false;
         state.message = "Checking the Access Token";
       })
       .addCase(
         checkAccessTokenSuccess,
         (state, action: PayloadAction<{ userData: IUserData }>) => {
-          state.isLoading = false;
+          state.accessStatus = "success";
           state.user = action.payload.userData;
           state.isAuthenticated = true;
-          state.isError = false;
           state.message = "Authenticated";
         }
       )
       .addCase(
         checkAccessTokenFailed,
         (state, action: PayloadAction<{ message: string }>) => {
-          state.isLoading = false;
+          state.accessStatus = "failed";
           state.user = null;
           state.isAuthenticated = true;
-          state.isError = true;
-          state.message = action.payload.message;
-        }
-      )
-      .addCase(refreshTokensPending, (state) => {
-        state.isLoading = true;
-        state.user = null;
-        state.isAuthenticated = false;
-        state.isError = false;
-        state.message = "Refreshing Tokens";
-      })
-      .addCase(refreshTokensSuccess, (state) => {
-        state.isLoading = true;
-        state.user = null;
-        state.isAuthenticated = false;
-        state.isError = false;
-        state.message = "Refreshed Tokens";
-      })
-      .addCase(
-        refreshTokensFailed,
-        (state, action: PayloadAction<{ message: string }>) => {
-          state.isLoading = true;
-          state.user = null;
-          state.isAuthenticated = false;
-          state.isError = true;
           state.message = action.payload.message;
         }
       )
       .addCase(loginPending, (state) => {
-        state.isLoading = true;
+        state.loginStatus = "pending";
         state.user = null;
         state.isAuthenticated = false;
-        state.isError = false;
         state.message = "Logging";
       })
       .addCase(
         loginSuccess,
         (state, action: PayloadAction<{ data: IUserData }>) => {
-          console.log(action.payload);
-          state.isLoading = false;
+          state.loginStatus = "success";
           state.user = action.payload.data;
           state.isAuthenticated = true;
-          state.isError = false;
           state.message = "Logged";
         }
       )
       .addCase(
         loginFailed,
         (state, action: PayloadAction<{ message: string }>) => {
-          state.isLoading = false;
+          state.loginStatus = "failed";
           state.user = null;
           state.isAuthenticated = false;
-          state.isError = true;
+          state.message = action.payload.message;
+        }
+      )
+      .addCase(registerPending, (state) => {
+        state.registerStatus = "pending";
+        state.message = "Registering";
+      })
+      .addCase(registerSuccess, (state) => {
+        state.registerStatus = "success";
+        state.message = "Registered, please login";
+      })
+      .addCase(
+        registerFailed,
+        (state, action: PayloadAction<{ message: string }>) => {
+          state.registerStatus = "failed";
+          state.message = action.payload.message;
+        }
+      )
+      .addCase(logoutPending, (state) => {
+        state.logoutStatus = "pending";
+        state.message = "Logging";
+      })
+      .addCase(logoutSuccess, (state) => {
+        state.logoutStatus = "success";
+        state.message = "Logged out";
+        state.isAuthenticated = false;
+      })
+      .addCase(
+        logoutFailed,
+        (state, action: PayloadAction<{ message: string }>) => {
+          state.logoutStatus = "failed";
           state.message = action.payload.message;
         }
       );
   },
 });
 
+export const { loginReset, registerReset, logoutReset } = AuthSlice.actions;
 export default AuthSlice.reducer;

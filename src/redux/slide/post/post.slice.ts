@@ -1,22 +1,32 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IResponsePostApi } from "../../../datatypes/types";
+import type { IPost, IResponsePostApi } from "../../../datatypes/types";
 import {
+  createPostFailed,
+  createPostPending,
+  createPostSuccess,
   getAllPublicPostFailed,
   getAllPublicPostPending,
   getAllPublicPostSuccess,
+  updatePostFailed,
+  updatePostPending,
+  updatePostSuccess,
 } from "./post.action";
 
 // init state
 interface IAuthState {
   isLoading: boolean;
-  status: "pending" | "success" | "failed" | "idle";
+  getAllStatus: "pending" | "success" | "failed" | "idle";
+  createStatus: "pending" | "success" | "failed" | "idle";
+  updateStatus: "pending" | "success" | "failed" | "idle";
   message: string | null;
   posts: IResponsePostApi;
 }
 
 const initialState: IAuthState = {
   isLoading: false,
-  status: "idle",
+  getAllStatus: "idle",
+  createStatus: "idle",
+  updateStatus: "idle",
   message: null,
   posts: {
     meta: {
@@ -32,12 +42,22 @@ const initialState: IAuthState = {
 // reducer
 
 export const PostSlice = createSlice({
-  name: "files",
+  name: "posts",
   initialState,
   reducers: {
     getAllPublicPostReset: (state) => {
       state.isLoading = false;
-      state.status = "idle";
+      state.getAllStatus = "idle";
+      state.message = null;
+    },
+    createPostReset: (state) => {
+      state.isLoading = false;
+      state.createStatus = "idle";
+      state.message = null;
+    },
+    updatePostReset: (state) => {
+      state.isLoading = false;
+      state.updateStatus = "idle";
       state.message = null;
     },
   },
@@ -45,7 +65,7 @@ export const PostSlice = createSlice({
     builder
       .addCase(getAllPublicPostPending, (state) => {
         state.isLoading = true;
-        state.status = "pending";
+        state.getAllStatus = "pending";
         state.message = null;
         state.posts = {
           meta: {
@@ -61,7 +81,7 @@ export const PostSlice = createSlice({
         getAllPublicPostSuccess,
         (state, action: PayloadAction<IResponsePostApi>) => {
           state.isLoading = false;
-          state.status = "success";
+          state.getAllStatus = "success";
           state.message = null;
           state.posts = action.payload;
         }
@@ -70,22 +90,50 @@ export const PostSlice = createSlice({
         getAllPublicPostFailed,
         (state, action: PayloadAction<{ message: string }>) => {
           state.isLoading = false;
-          state.status = "failed";
+          state.getAllStatus = "failed";
           state.message = action.payload.message;
-          state.posts = {
-            meta: {
-              page: 0,
-              limit: 0,
-              pages: 0,
-              total: 0,
-            },
-            data: [],
-          };
+        }
+      )
+      .addCase(createPostPending, (state) => {
+        state.isLoading = true;
+        state.createStatus = "pending";
+        state.message = null;
+      })
+      .addCase(createPostSuccess, (state) => {
+        state.isLoading = false;
+        state.createStatus = "success";
+        state.message = null;
+      })
+      .addCase(
+        createPostFailed,
+        (state, action: PayloadAction<{ message: string }>) => {
+          state.isLoading = true;
+          state.createStatus = "failed";
+          state.message = action.payload.message;
+        }
+      )
+      .addCase(updatePostPending, (state) => {
+        state.isLoading = true;
+        state.createStatus = "pending";
+        state.message = null;
+      })
+      .addCase(updatePostSuccess, (state) => {
+        state.isLoading = false;
+        state.createStatus = "success";
+        state.message = null;
+      })
+      .addCase(
+        updatePostFailed,
+        (state, action: PayloadAction<{ message: string }>) => {
+          state.isLoading = true;
+          state.createStatus = "failed";
+          state.message = action.payload.message;
         }
       );
   },
 });
 
-export const { getAllPublicPostReset } = PostSlice.actions;
+export const { getAllPublicPostReset, createPostReset, updatePostReset } =
+  PostSlice.actions;
 
 export default PostSlice.reducer;

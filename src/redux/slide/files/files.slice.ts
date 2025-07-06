@@ -22,7 +22,7 @@ const initialState: IAuthState = {
 
 // reducer
 
-export const AuthSlice = createSlice({
+export const FileSlice = createSlice({
   name: "files",
   initialState,
   reducers: {
@@ -59,6 +59,6 @@ export const AuthSlice = createSlice({
   },
 });
 
-export const { uploadOneFileReset } = AuthSlice.actions;
+export const { uploadOneFileReset } = FileSlice.actions;
 
-export default AuthSlice.reducer;
+export default FileSlice.reducer;

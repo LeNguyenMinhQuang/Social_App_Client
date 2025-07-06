@@ -1,26 +1,72 @@
 @import "tailwindcss";
-
-:root {
-  --bg-1: #f0f2f5;
-  --bg-2: #ffffff;
-  --bg-3: #183154;
-  --item-bg: #edf0f2;
-  --text-1: #14191e;
-  --text-2: #ffffff;
-  --text-3: #4e4e4e;
-  --text-border: #b6b6b6;
-  --text-active: #0f6fec;
-  --text-unactive: #868686;
-  --icon: #4e4e4e;
-  --green: #34cc34;
-}
+@import "./assets/css/color.css";
+@import "./assets/css/font.size.css";
+@import "./assets/css/animation.css";
+@import "./assets/css/size.css";
 
 * {
   font-family: "Nunito", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-size: var(--font-size-base); */
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg-1);
-  min-height: 5000px;
-  scroll-behavior: smooth;
+  background-color: var(--color-background);
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  color: var(--color-text-primary) !important;
+}
+
+input,
+textarea {
+  color: var(--color-text-primary) !important;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+p {
+  font-size: var(--font-size-body);
+  margin-bottom: 1em;
 }

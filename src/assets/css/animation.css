@@ -1,0 +1,55 @@
+@keyframes scaleIn {
+  from {
+    opacity: 0.5;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.5;
+    transform: scale(0.3);
+  }
+}
+
+@keyframes textareaScale {
+  from {
+    height: 42px;
+  }
+  to {
+    height: 160px;
+  }
+}
+
+@keyframes textareaUnscale {
+  from {
+    height: 160px;
+  }
+  to {
+    height: 42px;
+  }
+}
+
+.scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* forwards giữ lại trạng thái cuối của animation */
+}
+
+.scale-out {
+  animation: scaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* forwards giữ lại trạng thái cuối của animation */
+}
+
+.textareaScale {
+  animation: textareaScale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.textareaUnScale {
+  animation: textareaUnscale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

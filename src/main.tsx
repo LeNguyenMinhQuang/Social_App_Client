@@ -1,17 +1,16 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./App.css";
 import "antd/dist/reset.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Body from "./components/body/body.index.tsx";
-import Login from "./components/login/login.index.js";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux/store.ts";
 import { PersistGate } from "redux-persist/integration/react";
-import ProtectedRoute from "./components/auth/protected.route.tsx";
-import PublicRoute from "./components/auth/public.route.tsx";
-import AuthProvider from "./components/auth/auth.provider.tsx";
+import ProtectedRoute from "./components/guard/protected.route.tsx";
+import PublicRoute from "./components/guard/public.route.tsx";
+import AuthProvider from "./components/guard/auth.provider.tsx";
+import Auth from "./components/auth/auth.body.index.tsx";
+import Body from "./components/body/body.index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +30,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
       <PublicRoute>
-        <Login />
+        <Auth />
       </PublicRoute>
     ),
   },

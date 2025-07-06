@@ -23,3 +23,17 @@ export const loginPending = createAction<{
 }>("loginPending");
 export const loginSuccess = createAction<{ data: IUserData }>("loginSuccess");
 export const loginFailed = createAction<{ message: string }>("loginFailed");
+
+export const registerPending = createAction<{
+  userName: string;
+  password: string;
+  email: string;
+}>("registerPending");
+export const registerSuccess = createAction("registerSuccess");
+export const registerFailed = createAction<{ message: string }>(
+  "registerFailed"
+);
+
+export const logoutPending = createAction("logoutPending");
+export const logoutSuccess = createAction("logoutSuccess");
+export const logoutFailed = createAction<{ message: string }>("logoutFailed");

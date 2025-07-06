@@ -4,7 +4,11 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from "axios";
-import { getAccessToken, setAccessToken } from "../../ultils/token.service";
+import {
+  getAccessToken,
+  removeAccessToken,
+  setAccessToken,
+} from "../../utils/token.service";
 
 import { refreshTokens } from "../api/auth";
 
@@ -21,7 +25,7 @@ const axiosClient: AxiosInstance = axios.create({
 
 // Interceptor request
 axiosClient.interceptors.request.use(
-  function (config: InternalAxiosRequestConfig) {
+  (config: InternalAxiosRequestConfig) => {
     const access_token = getAccessToken();
     if (access_token) {
       config.headers.Authorization = `Bearer ${access_token}`;
@@ -35,18 +39,24 @@ axiosClient.interceptors.request.use(
 );
 
 axiosClient.interceptors.response.use(
-  function (response: AxiosResponse): AxiosResponse {
+  (response: AxiosResponse): AxiosResponse => {
     console.log("response: ", response);
     return response.data;
   },
-  async function (error: AxiosError): Promise<AxiosResponse> {
+  async (error: AxiosError): Promise<AxiosResponse> => {
     console.log("error", error);
     const orginalRequest = error.config as InternalAxiosRequestConfig & {
       _retry: boolean;
     };
+    // @ts-ignore
+    const errorMessage = error.response?.data?.message;
     console.log("old access token: ", orginalRequest.headers["Authorization"]);
 
-    if (error.response?.status === 401 && !orginalRequest._retry) {
+    if (
+      error.response?.status === 401 &&
+      !orginalRequest._retry &&
+      errorMessage === "Token expired"
+    ) {
       orginalRequest._retry = true;
       try {
         const access_token = await refreshTokens();
@@ -55,8 +65,10 @@ axiosClient.interceptors.response.use(
         orginalRequest.headers["Authorization"] = `Bearer ${access_token}`;
         return axiosClient(orginalRequest);
       } catch (error) {}
+    } else {
+      removeAccessToken();
     }
-    return Promise.reject(error);
+    return Promise.reject(error.response?.data);
   }
 );
 
